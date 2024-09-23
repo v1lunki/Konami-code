@@ -2,7 +2,7 @@
 
 $(document).ready(function () {
     // Declaring the comparison string
-    var keyCombinationString = ""
+    var keyCombinationString = []
     var triggerCode = "UUDDLRLRBA"
 
     // Event trigger for key that's pressed down. Picks up pressed key and adds it to string if it's one of the keys of Konami code
