@@ -1,17 +1,15 @@
 function konamicodeListener() {
-    // Declaring the comparison array
-    var keyCombinationArray = [];
+    // Declaring a counter for how many keys have been pressed in correct order
+    var keyCombinationProgress = 0;
     const triggerCodeArray = ["ARROWUP", "ARROWUP", "ARROWDOWN", "ARROWDOWN", "ARROWLEFT", "ARROWRIGHT", "ARROWLEFT", "ARROWRIGHT", "B", "A"];
 
-    // Event trigger for key that's pressed down. Picks up pressed key and adds it to array
+    // Event trigger for key that's pressed down. Picks up pressed key and compares it to the Konami code
     $(document).keydown(function (event) {
-        keyCombinationArray.push(event.key.toUpperCase()); // Changes the key string to upper cases and adds it to the array
+        checkforKonamicode(event.key.toUpperCase());
 
-        // Cleans up the array in case the input varies from triggerCode
-        cleanupArray();
-
-        // Prints combination in console (for debug)
-        console.log(keyCombinationArray);
+        // Prints keys and progress value in console (for debug)
+        console.log(keyCombinationProgress);
+        console.log(event.key.toUpperCase());
 
         // Checks if konami code is launched
         if (isKonamicode()) {
@@ -19,9 +17,9 @@ function konamicodeListener() {
         };
     });
 
-    // Check if keyboard combination is Konami code
+    // Check if Konami code is entered
     function isKonamicode() {
-        if (keyCombinationArray.toString() == triggerCodeArray.toString()) {
+        if (keyCombinationProgress == 10) {
             return true;
         } else {
             return false;
@@ -33,15 +31,16 @@ function konamicodeListener() {
         console.log("Konami code has been triggered!");
     }
 
-    // Cleans up the array (prevents that user can't form an endlessly long array)
-    function cleanupArray() {
-        if (keyCombinationArray[keyCombinationArray.length - 1] != triggerCodeArray[keyCombinationArray.length - 1]) {
-            if (keyCombinationArray[keyCombinationArray.length - 1] == triggerCodeArray[0]) {
-                keyCombinationArray = []
-                keyCombinationArray.push(triggerCodeArray[0]);
+    // Function for checking each key input and whether it follows the Konami code
+    function checkforKonamicode(key) {
+        if (key != triggerCodeArray[keyCombinationProgress]) {
+            if (key == triggerCodeArray[0]) {
+                keyCombinationProgress = 1
             } else {
-                keyCombinationArray = []
+                keyCombinationProgress = 0
             }
-        }
+        } else {
+            keyCombinationProgress += 1
+        };
     }
 }
