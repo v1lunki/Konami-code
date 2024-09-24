@@ -13,7 +13,13 @@
   <body>
     <script src="konamicode_trigger.js"></script>
     <script>
-        $(document).ready(konamicodeListener());
+        $(document).ready(function(){
+            function konamiCodeActivated(){
+                alert("Konami code has been triggered")
+            }
+
+            konamicodeListener(konamiCodeActivated)
+        });
     </script>
   </body>
 </html>
