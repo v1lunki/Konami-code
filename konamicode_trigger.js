@@ -1,4 +1,4 @@
-function konamicodeListener() {
+function konamicodeListener(onKonamicodeActivated) {
     // Declaring a counter for how many keys have been pressed in correct order
     var keyCombinationProgress = 0;
     const triggerCodeArray = ["ARROWUP", "ARROWUP", "ARROWDOWN", "ARROWDOWN", "ARROWLEFT", "ARROWRIGHT", "ARROWLEFT", "ARROWRIGHT", "B", "A"];
@@ -13,7 +13,7 @@ function konamicodeListener() {
 
         // Checks if konami code is launched
         if (isKonamicode()) {
-            konamicodeTriggered();
+            onKonamicodeActivated();
         };
     });
 
@@ -24,11 +24,6 @@ function konamicodeListener() {
         } else {
             return false;
         };
-    }
-
-    // Test function that is triggered by Konami code
-    function konamicodeTriggered() {
-        console.log("Konami code has been triggered!");
     }
 
     // Function for checking each key input and whether it follows the Konami code
